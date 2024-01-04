@@ -17,4 +17,4 @@ The purpose of this application is to provide a simple tool for analyzing a Word
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/yourproject.git
+   git clone https://github.com/abalegno/wpCrawler.git
