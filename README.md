@@ -42,6 +42,7 @@ The purpose of this application is to provide a simple tool for analyzing a Word
 
 4. The application will perform crawling and display the results in a table.
 
+
 ## Docker Example
 
 If you prefer to run the application in a Docker container, follow these steps:
@@ -58,8 +59,10 @@ If you prefer to run the application in a Docker container, follow these steps:
 
 3. Visit http://localhost:3000 in your browser.
 
+
 ## Contributions
 Contributions are welcome! If you encounter issues or have improvements, create an issue or submit a pull request.
+
 
 ## License
 This project is licensed under the MIT License.
