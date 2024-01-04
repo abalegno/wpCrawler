@@ -41,3 +41,25 @@ The purpose of this application is to provide a simple tool for analyzing a Word
 3. Enter the URL of the WordPress site you want to analyze in the form and click "Crawl."
 
 4. The application will perform crawling and display the results in a table.
+
+## Docker Example
+
+If you prefer to run the application in a Docker container, follow these steps:
+
+1. Build the container image:
+   
+   ```bash
+   docker build -t wordpress-crawler .
+
+2. Run the container:
+   
+   ```bash
+   docker run -p 3000:3000 -d wordpress-crawler
+
+3. Visit http://localhost:3000 in your browser.
+
+## Contributions
+Contributions are welcome! If you encounter issues or have improvements, create an issue or submit a pull request.
+
+## License
+This project is licensed under the MIT License.
