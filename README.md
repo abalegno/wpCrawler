@@ -18,3 +18,26 @@ The purpose of this application is to provide a simple tool for analyzing a Word
 
    ```bash
    git clone https://github.com/abalegno/wpCrawler.git
+
+2. Navigate to the project directory:
+   
+   ```bash
+   cd yourproject
+
+3. Install the dependencies:
+   
+   ```bash
+   npm install
+
+### Usage
+
+1. Start the application:
+   
+   ```bash
+   npm start
+   
+2. Open your browser and visit http://localhost:3000.
+
+3. Enter the URL of the WordPress site you want to analyze in the form and click "Crawl."
+
+4. The application will perform crawling and display the results in a table.
