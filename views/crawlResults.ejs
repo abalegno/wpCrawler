@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WordPress Crawl Results</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <h1>WordPress Crawl Results</h1>
+
+     <!-- Formulario para ingresar la URL -->
+  <form action="/getWordPressMetadataWithCustom" method="post">
+    <label for="urlInput">Enter WordPress URL:</label>
+    <input type="url" name="url" id="url" placeholder="https://example.com" pattern="https://.*" size="30" required />
+    <button type="submit">Crawl</button>
+  </form>
+
+  <table class="crawl-table">
+    <thead>
+      <tr>
+        <th>URL</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Keywords</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% pageDataArray.forEach(pageData => { %>
+        <tr>
+          <td><a href="<%= pageData.url %>" target="_blank"><%= pageData.url %></a></td>
+          <td><%= pageData.title %></td>
+          <td><%= pageData.description %></td>
+          <td><%= pageData.keywords %></td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+</body>
+</html>
