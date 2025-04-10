@@ -4,7 +4,7 @@ const cheerio = require('cheerio');
 const ejs = require('ejs');
 
 const app = express();
-const port = 3000;
+const port = 3333;
 
 app.set('view engine', 'ejs'); // Configura el motor de plantillas
 app.use(express.static('views')); // Configuración para servir archivos estáticos
@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 // Regular expression for basic URL validation
 const urlRegex = /^(https?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
 
-const maxUrlsToCrawl = 10; // Limit the number of URLs to crawl for efficiency
+const maxUrlsToCrawl = 3000; // Limit the number of URLs to crawl for efficiency
 
 // Function to crawl a website and extract data
 async function crawlAndExtractData(baseUrl) {

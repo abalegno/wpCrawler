@@ -36,7 +36,7 @@ The purpose of this application is to provide a simple tool for analyzing a Word
    ```bash
    npm start
    
-2. Open your browser and visit http://localhost:3000.
+2. Open your browser and visit http://localhost:3333.
 
 3. Enter the URL of the WordPress site you want to analyze in the form and click "Crawl."
 
@@ -55,9 +55,9 @@ If you prefer to run the application in a Docker container, follow these steps:
 2. Run the container:
    
    ```bash
-   docker run -p 3000:3000 -d wordpress-crawler
+   docker run -p 3333:3333 -d wordpress-crawler
 
-3. Visit http://localhost:3000 in your browser.
+3. Visit http://localhost:3333 in your browser.
 
 
 ## Contributions

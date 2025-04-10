@@ -18,25 +18,60 @@
     <button type="submit">Crawl</button>
   </form>
 
-  <table class="crawl-table">
-    <thead>
-      <tr>
-        <th>URL</th>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Keywords</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% pageDataArray.forEach(pageData => { %>
+  <div id="results">
+    <button onclick="exportToCSV()">Export to CSV</button> <span id="urlCount">(0 URLs crawled)</span>
+
+    <table class="crawl-table">
+      <thead>
         <tr>
-          <td><a href="<%= pageData.url %>" target="_blank"><%= pageData.url %></a></td>
-          <td><%= pageData.title %></td>
-          <td><%= pageData.description %></td>
-          <td><%= pageData.keywords %></td>
+          <th>URL</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Keywords</th>
         </tr>
-      <% }); %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% pageDataArray.forEach(pageData => { %>
+          <tr>
+            <td><a href="<%= pageData.url %>" target="_blank"><%= pageData.url %></a></td>
+            <td><%= pageData.title %></td>
+            <td><%= pageData.description %></td>
+            <td><%= pageData.keywords %></td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    function updateUrlCount(count) {
+      document.getElementById('urlCount').textContent = `(${count} URLs crawled)`;
+    }
+
+    function exportToCSV() {      // Get the table element
+      const table = document.querySelector('.crawl-table');
+
+      // Extract data from the table
+      const rows = Array.from(table.querySelectorAll('tr')).map(row =>
+          Array.from(row.querySelectorAll('th, td')).map(cell => cell.textContent).join(',')
+      );
+      const csvData = rows.join('\n');
+
+      // Create a temporary <a> element
+      const link = document.createElement('a');
+
+      // Set the href attribute to a data URL containing the CSV data
+      link.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csvData);
+
+      // Set the download attribute
+      link.download = 'crawl_results.csv';
+
+      // Programmatically click the <a> element to trigger the download
+      link.click();
+    }
+
+    // Initial URL count update
+    updateUrlCount(document.querySelector('.crawl-table tbody').rows.length);
+  </script>
 </body>
 </html>
