@@ -12,6 +12,6 @@ COPY views/styles.css .
 # Instala las dependencias
 RUN npm install
 # Expone el puerto en el que la aplicación estará escuchando
-EXPOSE 3000
+EXPOSE 3333
 # Comando para iniciar la aplicación
 CMD ["npm", "start"]

@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 // Regular expression for basic URL validation
 const urlRegex = /^(https?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
 
-const maxUrlsToCrawl = 3000; // Limit the number of URLs to crawl for efficiency
+const maxUrlsToCrawl = 3333; // Limit the number of URLs to crawl for efficiency
 
 // Function to crawl a website and extract data
 async function crawlAndExtractData(baseUrl) {
