@@ -14,7 +14,7 @@ This project, crafted with Node.js, Express, and EJS, lets you crawl a WordPress
 
 ## 📅 History
 
-This project began its life in 2023 as a hand-crafted tool. In 2024, it received a major upgrade ⬆️, integrating Firebase Studio and Gemini to enhance its capabilities.
+This project began its life in 2023 as a hand-crafted tool. In April 2025, it received a major upgrade ⬆️, integrating Firebase Studio and Gemini to enhance its capabilities.
 
 ## Installation
 
