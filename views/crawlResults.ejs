@@ -15,8 +15,13 @@
   <form action="/getWordPressMetadataWithCustom" method="post">
     <label for="urlInput">Enter WordPress URL:</label>
     <input type="url" name="url" id="url" placeholder="https://example.com" pattern="https://.*" size="30" required />
+    <label for="numberOfUrls">Number of URLs:</label>
+    <input type="number" name="numberOfUrls" id="numberOfUrls" value="10" min="1">
+    <input type="checkbox" name="selectAllUrls" id="selectAllUrls">
+    <label for="selectAllUrls">Crawl All URLs</label>
     <button type="submit">Crawl</button>
   </form>
+  <div id="loader"></div>
 
   <div id="results">
     <button onclick="exportToCSV()">Export to CSV</button> <span id="urlCount">(0 URLs crawled)</span>
@@ -42,6 +47,23 @@
       </tbody>
     </table>
   </div>
+
+  <script>
+    const form = document.querySelector('form');
+    const loader = document.getElementById('loader');
+    const resultsDiv = document.getElementById('results');
+    const crawlButton = form.querySelector('button[type="submit"]'); // Get the crawl button
+
+    form.addEventListener('submit', () => {
+      loader.style.display = 'block'; // Show the loader
+      resultsDiv.style.display = 'none'; // Hide the results
+ crawlButton.classList.add('hidden'); // Hide the button using the 'hidden' class
+    });
+    // Hide the loader when results are displayed (assuming results are visible when the div with id "results" is visible)
+    if (resultsDiv.style.display !== 'none') {
+      loader.style.display = 'none';
+    }
+  </script>
 
   <script>
     function updateUrlCount(count) {
@@ -70,8 +92,22 @@
       link.click();
     }
 
-    // Initial URL count update
-    updateUrlCount(document.querySelector('.crawl-table tbody').rows.length);
+    // Initial URL count update (if results are present)
+    if (document.querySelector('.crawl-table tbody')) {
+        updateUrlCount(document.querySelector('.crawl-table tbody').rows.length);
+    }
   </script>
+ <script>
+    const selectAllCheckbox = document.getElementById('selectAllUrls');
+    const numberOfUrlsInput = document.getElementById('numberOfUrls');
+
+    selectAllCheckbox.addEventListener('change', () => {
+      if (selectAllCheckbox.checked) {
+        numberOfUrlsInput.disabled = true;
+      } else {
+        numberOfUrlsInput.disabled = false;
+      }
+    });
+ </script>
 </body>
 </html>

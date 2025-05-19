@@ -16,17 +16,15 @@ const urlRegex = /^(https?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\
 const maxUrlsToCrawl = 3333; // Limit the number of URLs to crawl for efficiency
 
 // Function to crawl a website and extract data
-async function crawlAndExtractData(baseUrl) {
+async function crawlAndExtractData(baseUrl, limit) {
     try {
-        // Fetch the initial page
         const response = await axios.get(baseUrl);
         const $ = cheerio.load(response.data);
 
         const urls = [];
-        // Find all links on the page and filter those starting with the base URL
         $('a').each((index, element) => {
-            if (urls.length >= maxUrlsToCrawl) {
-                return false; // Stop crawling after reaching the limit
+            if (urls.length >= limit) { // Changed condition to use limit
+                return false;
             }
             const href = $(element).attr('href');
             if (href && href.startsWith(baseUrl)) {
@@ -34,7 +32,6 @@ async function crawlAndExtractData(baseUrl) {
             }
         });
 
-        // Crawl each URL and extract data
         const dataPromises = urls.map(async (url) => {
             try {
                 const pageResponse = await axios.get(url);
@@ -47,24 +44,25 @@ async function crawlAndExtractData(baseUrl) {
             }
         });
 
-        // Wait for all promises to resolve and return the results
         return await Promise.all(dataPromises);
     } catch (error) {
-        console.error('Error during crawling:', error.message);
-        // Provide a more specific error message based on the cause
+        console.error('Error during crawling and extraction:', error.message);
         throw new Error(`Failed to fetch initial page: ${error.message}`);
     }
 }
 
+
 app.post('/getWordPressMetadataWithCustom', async (req, res) => {
-    const wordpressSiteUrl = req.body.url;
-    // Validate the provided URL
+    const { url: wordpressSiteUrl, numberOfUrls, selectAllUrls } = req.body;
+
     if (!wordpressSiteUrl || !urlRegex.test(wordpressSiteUrl)) {
         return res.status(400).send('Invalid URL');
     }
+
     try {
-        // Crawl the provided URL and render the results
-        const pageDataArray = await crawlAndExtractData(wordpressSiteUrl);
+        let limit = selectAllUrls ? Infinity : parseInt(numberOfUrls, 10) || maxUrlsToCrawl;
+
+        const pageDataArray = await crawlAndExtractData(wordpressSiteUrl, limit);
         res.render('crawlResults', { pageDataArray });
     } catch (error) {
         console.error('Error fetching WordPress site information:', error.message);
