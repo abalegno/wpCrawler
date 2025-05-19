@@ -22,13 +22,17 @@ async function crawlAndExtractData(baseUrl, limit) {
         const $ = cheerio.load(response.data);
 
         const urls = [];
+        const visitedUrls = new Set();
         $('a').each((index, element) => {
             if (urls.length >= limit) { // Changed condition to use limit
                 return false;
             }
             const href = $(element).attr('href');
             if (href && href.startsWith(baseUrl)) {
-                urls.push(href);
+                if (!visitedUrls.has(href)) {
+                    urls.push(href);
+                    visitedUrls.add(href);
+                }
             }
         });
 

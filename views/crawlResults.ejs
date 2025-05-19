@@ -26,6 +26,7 @@
   <div id="results">
     <button onclick="exportToCSV()">Export to CSV</button> <span id="urlCount">(0 URLs crawled)</span>
 
+    <div class="table-responsive">
     <table class="crawl-table">
       <thead>
         <tr>
@@ -38,16 +39,15 @@
       <tbody>
         <% pageDataArray.forEach(pageData => { %>
           <tr>
-            <td><a href="<%= pageData.url %>" target="_blank"><%= pageData.url %></a></td>
-            <td><%= pageData.title %></td>
-            <td><%= pageData.description %></td>
-            <td><%= pageData.keywords %></td>
+            <td data-label="URL"><a href="<%= pageData.url %>" target="_blank"><%= pageData.url %></a></td>
+            <td data-label="Title"><%= pageData.title %></td>
+            <td data-label="Description"><%= pageData.description %></td>            <td data-label="Keywords"><%= pageData.keywords %></td>
           </tr>
         <% }); %>
-      </tbody>
     </table>
+    </div>
   </div>
-
+ 
   <script>
     const form = document.querySelector('form');
     const loader = document.getElementById('loader');
